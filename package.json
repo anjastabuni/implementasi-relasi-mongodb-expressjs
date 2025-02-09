@@ -1,0 +1,26 @@
+{
+  "name": "lear-restful-express-sederhana",
+  "version": "1.0.0",
+  "description": "belajar membuat proyek sederhana dengan express, ejs dan mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anjastabuni/lear-restful-express-sederhana.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anjastabuni/lear-restful-express-sederhana/issues"
+  },
+  "homepage": "https://github.com/anjastabuni/lear-restful-express-sederhana#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.9.5"
+  }
+}
