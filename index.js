@@ -78,6 +78,7 @@ app.post(
     const garment = await Garment.findById(garment_id);
     const product = new Product(req.body);
     garment.products.push(product);
+    product.garment = garment;
     await garment.save();
     await product.save();
     res.redirect(`/garments/${garment._id}`);
@@ -116,8 +117,7 @@ app.get(
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     const product = await Product.findById(id).populate("garment");
-    // res.render("products/show", { product });
-    res.send(product);
+    res.render("products/show", { product });
   })
 );
 
