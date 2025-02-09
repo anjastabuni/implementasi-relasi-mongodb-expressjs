@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Garmen</title>
+  </head>
+  <body>
+    <h1>Garmen</h1>
+    <a href="/garment/create">Add Garmen</a>
+    <ul>
+      <% for (let garment of garments) { %>
+      <li>
+        <a href="/garmen/<%= garment._id %>"> <%= garment.name %> - <%= garment.location %> </a>
+      </li>
+      <% } %>
+    </ul>
+  </body>
+</html>
