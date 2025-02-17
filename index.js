@@ -37,6 +37,10 @@ app.use(
 );
 
 app.use(flash());
+app.use((req, res, next) => {
+  res.locals.flash_messages = req.flash("flash_messages");
+  next();
+});
 
 const wrapAsync = (fn) => (req, res, next) => {
   fn(req, res, next).catch(next);
@@ -51,7 +55,7 @@ app.get(
   "/garments",
   wrapAsync(async (req, res) => {
     const garments = await Garment.find({});
-    res.render("garment/index", { garments, messages: req.flash("success") });
+    res.render("garment/index", { garments });
   })
 );
 
@@ -64,7 +68,7 @@ app.post(
   wrapAsync(async (req, res) => {
     const garment = new Garment(req.body);
     await garment.save();
-    req.flash("success", "Berhasil menambahkan data");
+    req.flash("flash_messages", "Berhasil menambahkan data");
     res.redirect(`/garments`);
   })
 );
