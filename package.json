@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/anjastabuni/lear-restful-express-sederhana#readme",
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
+    "express-session": "^1.18.1",
     "method-override": "^3.0.0",
     "mongoose": "^8.9.5"
   }

@@ -2,6 +2,8 @@ const path = require("path");
 const express = require("express");
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
+const session = require("express-session");
+const flash = require("connect-flash");
 const app = express();
 
 const ErrorHandler = require("./ErrorHandler");
@@ -26,6 +28,15 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(
+  session({
+    secret: "keyboard-cat",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+app.use(flash());
 
 const wrapAsync = (fn) => (req, res, next) => {
   fn(req, res, next).catch(next);
@@ -40,7 +51,7 @@ app.get(
   "/garments",
   wrapAsync(async (req, res) => {
     const garments = await Garment.find({});
-    res.render("garment/index", { garments });
+    res.render("garment/index", { garments, messages: req.flash("success") });
   })
 );
 
@@ -53,6 +64,7 @@ app.post(
   wrapAsync(async (req, res) => {
     const garment = new Garment(req.body);
     await garment.save();
+    req.flash("success", "Berhasil menambahkan data");
     res.redirect(`/garments`);
   })
 );
@@ -90,6 +102,7 @@ app.delete(
   wrapAsync(async (req, res) => {
     const { garment_id } = req.params;
     await Garment.findOneAndDelete({ _id: garment_id });
+    req.flash("success", "Berhasil menghapus data");
     res.redirect("/garments");
   })
 );
